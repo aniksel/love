@@ -406,18 +406,7 @@
       object-position: center;
       background: rgba(10, 8, 18, 0.18);
       filter: saturate(1.03) contrast(1.02);
-      opacity: 1;
-      transform: scale(1);
-      transition: opacity 0.55s ease, transform 0.8s ease;
-    }
-
-    .memory-main.is-swapping .memory-photo-frame img {
-      opacity: 0;
-      transform: scale(1.035);
-    }
-
-    .memory-main.is-revealing {
-      animation: revealCard 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: opacity 0.16s ease;
     }
 
     .memory-nav-btn {
@@ -455,21 +444,6 @@
     .memory-nav-btn.next {
       right: 18px;
     }
-
-    @keyframes revealCard {
-      0% {
-        transform: scale(0.98);
-        box-shadow: 0 20px 36px rgba(0,0,0,0.18);
-      }
-      45% {
-        transform: scale(1.02);
-        box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset, 0 0 42px rgba(255, 126, 180, 0.16), 0 28px 52px rgba(0,0,0,0.24);
-      }
-      100% {
-        transform: scale(1);
-      }
-    }
-
 
     @media (max-width: 640px) {
       body {
@@ -572,7 +546,7 @@
         <div class="photo-wrap">
           <img src="1163.JPEG" alt="Любимая фотография" />
         </div>
-        <div class="small">небольшой сюрприз</div>
+        <div class="small"></div>
         <h1>Для моих любимых родителей от Ани <span class="emoji">❤️</span></h1>
         <p>Это маленькая интерактивная открытка. Нажмите кнопку ниже</p>
         <div class="btn-row">
@@ -587,16 +561,16 @@
 
         <div class="choice-grid">
           <div class="choice" onclick="showChoiceMessage('Спасибо вам за всё, что вы для меня сделали. Я это очень ценю 💖')">
-            тёплое сообщение
+            важная информация
           </div>
           <div class="choice" onclick="showChoiceMessage('Вы у меня самые лучшие!!!')">
-            милое сообщение
+            информация для сведения 
           </div>
           <div class="choice" onclick="showChoiceMessage('Я вас очень очень люблю')">
-            смешное сообщение
+            самая важная информация
           </div>
-          <div class="choice" onclick="showChoiceMessage('Хорошего дня❤️')">
-            секретное сообщение
+          <div class="choice" onclick="showChoiceMessage('Доброе утро  ❤️')">
+            ежедневное сообщение
           </div>
         </div>
 
@@ -609,7 +583,7 @@
 
       <div class="screen" id="screen3">
         <div class="small">шаг 2</div>
-        <h2>Теперь небольшая игра</h2>
+        <h2>Утренний интерактив</h2>
         <p>Нажмите на сердечко 7 раз, чтобы открыть главное послание.</p>
 
         <div class="tap-heart" onclick="tapHeart()">❤️</div>
@@ -627,7 +601,7 @@
         <div class="photo-wrap">
           <img src="1163.JPEG" alt="Любимая фотография" />
         </div>
-        <div class="small">финал</div>
+        <div class="small">фотопоказ</div>
         <div class="big-heart">💗</div>
         <h2>Я вас очень люблю</h2>
         <div class="final-text">
@@ -757,38 +731,20 @@
       }
     }
 
-    function renderMemory(index, reveal = false) {
+    function renderMemory(index) {
       currentMemoryIndex = index;
 
       const featuredPhoto = document.getElementById('featuredPhoto');
       const memoryStatus = document.getElementById('memoryStatus');
-      const memoryMain = document.getElementById('memoryMain');
 
-      memoryMain.classList.remove('is-swapping', 'is-revealing');
-      void memoryMain.offsetWidth;
-      memoryMain.classList.add('is-swapping');
-      if (reveal) {
-        memoryMain.classList.add('is-revealing');
-      }
-
-      setTimeout(() => {
-        featuredPhoto.src = memories[index];
-        featuredPhoto.alt = `Воспоминание ${index + 1}`;
-        memoryStatus.textContent = `${index + 1} / ${memories.length}`;
-      }, 180);
-
-      setTimeout(() => {
-        memoryMain.classList.remove('is-swapping');
-      }, 560);
-
-      setTimeout(() => {
-        memoryMain.classList.remove('is-revealing');
-      }, 920);
+      featuredPhoto.src = memories[index];
+      featuredPhoto.alt = `Воспоминание ${index + 1}`;
+      memoryStatus.textContent = `${index + 1} / ${memories.length}`;
     }
 
     function showMemory(index) {
       if (index !== currentMemoryIndex) {
-        renderMemory(index, false);
+        renderMemory(index);
       }
     }
 
@@ -812,7 +768,7 @@
     }
 
     function activateFinalScreen() {
-      renderMemory(currentMemoryIndex, false);
+      renderMemory(currentMemoryIndex);
     }
 
     function restartCard() {
@@ -822,12 +778,17 @@
       document.getElementById('tapCount').textContent = '0';
       document.getElementById('progressFill').style.width = '0%';
       document.getElementById('choiceMessage').textContent = 'Выберите одну карточку выше ✨';
-      renderMemory(0, false);
+      renderMemory(0);
       nextScreen(1);
     }
 
+    memories.forEach(src => {
+      const image = new Image();
+      image.src = src;
+    });
+
     createBackground();
-    renderMemory(0, false);
+    renderMemory(0);
 
     document.getElementById('memoryPhotoFrame').addEventListener('touchstart', event => {
       touchStartX = event.changedTouches[0].clientX;
