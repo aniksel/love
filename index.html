@@ -7,21 +7,29 @@
   <style>
     * {
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
     }
 
     body {
-      margin: 0;
       min-height: 100vh;
       font-family: Arial, sans-serif;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
       background: linear-gradient(-45deg, #0f1020, #30192b, #1b2c52, #4a1e37);
       background-size: 400% 400%;
       animation: bgShift 12s ease infinite;
       color: white;
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
+      padding: 20px 14px;
     }
 
     @keyframes bgShift {
@@ -31,10 +39,11 @@
     }
 
     .layer {
-      position: absolute;
+      position: fixed;
       inset: 0;
       pointer-events: none;
       overflow: hidden;
+      z-index: 0;
     }
 
     .heart {
@@ -73,18 +82,25 @@
       50% { opacity: 1; transform: scale(1.8); }
     }
 
-    .card {
+    .app {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: relative;
-      z-index: 2;
-      width: min(94vw, 760px);
-      min-height: 520px;
-      background: rgba(255,255,255,0.09);
+      z-index: 1;
+    }
+
+    .card {
+      width: min(100%, 760px);
+      background: rgba(255,255,255,0.1);
       backdrop-filter: blur(14px);
-      border-radius: 28px;
+      border-radius: 26px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-      padding: 30px 24px;
+      padding: 22px 18px 24px;
       text-align: center;
       overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
     }
 
     .screen {
@@ -107,31 +123,50 @@
       }
     }
 
+    .photo-wrap {
+      width: 100%;
+      max-width: 250px;
+      margin: 0 auto 18px;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.28);
+      border: 2px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .photo-wrap img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+
     .small {
-      letter-spacing: 0.18em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      font-size: 14px;
-      opacity: 0.8;
-      margin-bottom: 18px;
+      font-size: 12px;
+      opacity: 0.82;
+      margin-bottom: 14px;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(36px, 7vw, 72px);
-      line-height: 1.05;
+      font-size: clamp(30px, 8vw, 66px);
+      line-height: 1.08;
       text-shadow: 0 0 16px rgba(255, 120, 170, 0.35);
     }
 
     h2 {
-      font-size: clamp(28px, 5vw, 46px);
-      margin: 10px 0 12px;
+      font-size: clamp(24px, 6vw, 42px);
+      margin: 6px 0 10px;
+      line-height: 1.15;
     }
 
     p {
-      font-size: clamp(18px, 2.6vw, 24px);
+      font-size: clamp(16px, 4.1vw, 22px);
       line-height: 1.5;
       opacity: 0.96;
-      margin: 16px auto;
+      margin: 14px auto;
       max-width: 560px;
     }
 
@@ -147,17 +182,18 @@
 
     .btn-row {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       justify-content: center;
       flex-wrap: wrap;
-      margin-top: 26px;
+      margin-top: 22px;
     }
 
     button {
       border: none;
       border-radius: 999px;
-      padding: 14px 24px;
-      font-size: 17px;
+      padding: 14px 20px;
+      min-height: 50px;
+      font-size: 16px;
       cursor: pointer;
       color: white;
       background: linear-gradient(90deg, #ff5f8f, #ff82b5);
@@ -170,19 +206,23 @@
       box-shadow: 0 14px 34px rgba(255, 90, 140, 0.4);
     }
 
+    button:active {
+      transform: scale(0.98);
+    }
+
     .ghost {
       background: rgba(255,255,255,0.14);
       box-shadow: none;
     }
 
     .message-box {
-      margin-top: 24px;
-      min-height: 120px;
-      padding: 18px;
-      border-radius: 22px;
+      margin-top: 18px;
+      min-height: 110px;
+      padding: 16px;
+      border-radius: 20px;
       background: rgba(255,255,255,0.08);
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
-      font-size: clamp(20px, 3vw, 28px);
+      font-size: clamp(18px, 4.6vw, 26px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -191,19 +231,19 @@
 
     .choice-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(120px, 1fr));
-      gap: 12px;
-      margin-top: 24px;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 20px;
     }
 
     .choice {
-      padding: 18px 14px;
-      border-radius: 22px;
+      padding: 16px 12px;
+      border-radius: 20px;
       background: rgba(255,255,255,0.08);
       cursor: pointer;
       transition: transform 0.2s ease, background 0.2s ease;
       border: 1px solid rgba(255,255,255,0.08);
-      font-size: 17px;
+      font-size: 15px;
       line-height: 1.35;
     }
 
@@ -213,14 +253,14 @@
     }
 
     .big-heart {
-      font-size: 72px;
+      font-size: 64px;
       margin: 8px 0 10px;
       animation: pulse 1s infinite ease-in-out;
     }
 
     .progress {
-      margin: 20px auto 0;
-      width: min(90%, 420px);
+      margin: 18px auto 0;
+      width: min(100%, 420px);
       height: 10px;
       border-radius: 999px;
       background: rgba(255,255,255,0.12);
@@ -235,14 +275,14 @@
     }
 
     .tap-heart {
-      margin: 28px auto 0;
-      width: 120px;
-      height: 120px;
+      margin: 24px auto 0;
+      width: 112px;
+      height: 112px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 56px;
+      font-size: 52px;
       background: rgba(255,255,255,0.12);
       cursor: pointer;
       user-select: none;
@@ -256,29 +296,80 @@
 
     .counter {
       margin-top: 14px;
-      font-size: 20px;
+      font-size: 18px;
       opacity: 0.92;
     }
 
     .final-text {
-      font-size: clamp(22px, 3vw, 32px);
+      font-size: clamp(18px, 4.6vw, 28px);
       max-width: 580px;
-      margin: 18px auto 0;
+      margin: 16px auto 0;
       line-height: 1.5;
     }
 
+    .photo-note {
+      margin-top: 12px;
+      font-size: 14px;
+      opacity: 0.78;
+    }
+
     @media (max-width: 640px) {
+      body {
+        padding: 12px;
+        align-items: flex-start;
+      }
+
+      .app {
+        padding: 4px 0 20px;
+      }
+
       .card {
-        min-height: 580px;
-        padding: 24px 18px;
+        border-radius: 22px;
+        padding: 18px 14px 20px;
       }
 
       .choice-grid {
         grid-template-columns: 1fr;
       }
 
+      .btn-row {
+        flex-direction: column;
+      }
+
       button {
         width: 100%;
+      }
+
+      .tap-heart {
+        width: 100px;
+        height: 100px;
+        font-size: 48px;
+      }
+
+      .message-box {
+        min-height: 100px;
+      }
+
+      .photo-wrap {
+        max-width: 220px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .card {
+        padding: 16px 12px 18px;
+      }
+
+      .small {
+        font-size: 11px;
+      }
+
+      .choice {
+        font-size: 14px;
+      }
+
+      .photo-wrap {
+        max-width: 190px;
       }
     }
   </style>
@@ -287,71 +378,80 @@
   <div class="layer" id="heartsLayer"></div>
   <div class="layer" id="sparkLayer"></div>
 
-  <div class="card">
-    <div class="screen active" id="screen1">
-      <div class="small">небольшой сюрприз</div>
-      <h1>Для моих любимых <span class="emoji">❤️</span></h1>
-      <p>У меня для вас маленькая интерактивная открытка. Нажмите кнопку ниже и давайте начнём.</p>
-      <div class="btn-row">
-        <button onclick="nextScreen(2)">открыть открытку</button>
-      </div>
-    </div>
-
-    <div class="screen" id="screen2">
-      <div class="small">шаг 1</div>
-      <h2>Сначала выберите настроение</h2>
-      <p>Какую версию послания вы хотите открыть первой?</p>
-
-      <div class="choice-grid">
-        <div class="choice" onclick="showChoiceMessage('Спасибо вам за всё, что вы для меня сделали. Я это очень ценю 💖', 3)">
-          тёплое сообщение
+  <div class="app">
+    <div class="card">
+      <div class="screen active" id="screen1">
+        <div class="photo-wrap">
+          <img src="parents.jpg" alt="Любимая фотография" />
         </div>
-        <div class="choice" onclick="showChoiceMessage('Вы у меня самые лучшие. Правда. Без преувеличений и официально 💌', 3)">
-          милое сообщение
+        <div class="small">небольшой сюрприз</div>
+        <h1>Для моих любимых <span class="emoji">❤️</span></h1>
+        <p>У меня для вас маленькая интерактивная открытка. Нажмите кнопку ниже и давайте начнём.</p>
+        <div class="btn-row">
+          <button onclick="nextScreen(2)">открыть открытку</button>
         </div>
-        <div class="choice" onclick="showChoiceMessage('Если бы был рейтинг родителей, вы бы точно заняли первое место 🏆', 3)">
-          смешное сообщение
+        <div class="photo-note">Сюда можно поставить вашу общую фотографию</div>
+      </div>
+
+      <div class="screen" id="screen2">
+        <div class="small">шаг 1</div>
+        <h2>Сначала выберите настроение</h2>
+        <p>Какую версию послания вы хотите открыть первой?</p>
+
+        <div class="choice-grid">
+          <div class="choice" onclick="showChoiceMessage('Спасибо вам за всё, что вы для меня сделали. Я это очень ценю 💖')">
+            тёплое сообщение
+          </div>
+          <div class="choice" onclick="showChoiceMessage('Вы у меня самые лучшие. Правда. Без преувеличений и официально 💌')">
+            милое сообщение
+          </div>
+          <div class="choice" onclick="showChoiceMessage('Если бы был рейтинг родителей, вы бы точно заняли первое место 🏆')">
+            смешное сообщение
+          </div>
+          <div class="choice" onclick="showChoiceMessage('Эта открытка вообще-то сделана с очень большим количеством любви ❤️')">
+            секретное сообщение
+          </div>
         </div>
-        <div class="choice" onclick="showChoiceMessage('Эта открытка вообще-то сделана с очень большим количеством любви ❤️', 3)">
-          секретное сообщение
+
+        <div class="message-box" id="choiceMessage">Выберите одну карточку выше ✨</div>
+        <div class="btn-row">
+          <button class="ghost" onclick="nextScreen(1)">назад</button>
+          <button onclick="nextScreen(3)">дальше</button>
         </div>
       </div>
 
-      <div class="message-box" id="choiceMessage">Выберите одну карточку выше ✨</div>
-      <div class="btn-row">
-        <button class="ghost" onclick="nextScreen(1)">назад</button>
-        <button onclick="nextScreen(3)">дальше</button>
-      </div>
-    </div>
+      <div class="screen" id="screen3">
+        <div class="small">шаг 2</div>
+        <h2>Теперь небольшая игра</h2>
+        <p>Нажмите на сердечко 7 раз, чтобы открыть главное послание.</p>
 
-    <div class="screen" id="screen3">
-      <div class="small">шаг 2</div>
-      <h2>Теперь небольшая игра</h2>
-      <p>Нажмите на сердечко 7 раз, чтобы открыть главное послание.</p>
+        <div class="tap-heart" onclick="tapHeart()">❤️</div>
+        <div class="counter">Нажато: <span id="tapCount">0</span> / 7</div>
+        <div class="progress">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
 
-      <div class="tap-heart" onclick="tapHeart()">❤️</div>
-      <div class="counter">Нажато: <span id="tapCount">0</span> / 7</div>
-      <div class="progress">
-        <div class="progress-fill" id="progressFill"></div>
+        <div class="btn-row">
+          <button class="ghost" onclick="nextScreen(2)">назад</button>
+        </div>
       </div>
 
-      <div class="btn-row">
-        <button class="ghost" onclick="nextScreen(2)">назад</button>
-      </div>
-    </div>
+      <div class="screen" id="screen4">
+        <div class="photo-wrap">
+          <img src="parents.jpg" alt="Любимая фотография" />
+        </div>
+        <div class="small">финал</div>
+        <div class="big-heart">💗</div>
+        <h2>Я вас очень люблю</h2>
+        <div class="final-text">
+          Спасибо вам за заботу, поддержку, терпение, доброту и за то, что вы у меня есть.
+          Вы для меня очень важны. Эта страница — маленькое напоминание о том, как сильно я вас люблю.
+        </div>
 
-    <div class="screen" id="screen4">
-      <div class="small">финал</div>
-      <div class="big-heart">💗</div>
-      <h2>Я вас очень люблю</h2>
-      <div class="final-text">
-        Спасибо вам за заботу, поддержку, терпение, доброту и за то, что вы у меня есть.
-        Вы для меня очень важны. Эта страница — маленькое напоминание о том, как сильно я вас люблю.
-      </div>
-
-      <div class="btn-row">
-        <button onclick="celebrate()">ещё сердечек</button>
-        <button class="ghost" onclick="restartCard()">пройти ещё раз</button>
+        <div class="btn-row">
+          <button onclick="celebrate()">ещё сердечек</button>
+          <button class="ghost" onclick="restartCard()">пройти ещё раз</button>
+        </div>
       </div>
     </div>
   </div>
@@ -363,18 +463,18 @@
     let taps = 0;
 
     function createBackground() {
-      for (let i = 0; i < 24; i++) {
+      for (let i = 0; i < 20; i++) {
         const heart = document.createElement('div');
         heart.className = 'heart';
         heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
         heart.style.left = Math.random() * 100 + '%';
-        heart.style.fontSize = 16 + Math.random() * 24 + 'px';
-        heart.style.animationDuration = 6 + Math.random() * 8 + 's';
+        heart.style.fontSize = 16 + Math.random() * 22 + 'px';
+        heart.style.animationDuration = 7 + Math.random() * 8 + 's';
         heart.style.animationDelay = Math.random() * 8 + 's';
         heartsLayer.appendChild(heart);
       }
 
-      for (let i = 0; i < 55; i++) {
+      for (let i = 0; i < 42; i++) {
         const spark = document.createElement('div');
         spark.className = 'spark';
         spark.style.left = Math.random() * 100 + '%';
@@ -390,9 +490,10 @@
         screen.classList.remove('active');
       });
       document.getElementById('screen' + n).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function showChoiceMessage(text, screenNumber) {
+    function showChoiceMessage(text) {
       document.getElementById('choiceMessage').textContent = text;
     }
 
@@ -407,7 +508,7 @@
       if (taps === 7) {
         setTimeout(() => {
           nextScreen(4);
-        }, 500);
+        }, 450);
       }
     }
 
@@ -415,18 +516,18 @@
       for (let i = 0; i < 8; i++) {
         const burst = document.createElement('div');
         burst.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
-        burst.style.position = 'absolute';
-        burst.style.left = 50 + (Math.random() * 20 - 10) + '%';
-        burst.style.top = 55 + (Math.random() * 10 - 5) + '%';
-        burst.style.fontSize = 18 + Math.random() * 20 + 'px';
+        burst.style.position = 'fixed';
+        burst.style.left = 50 + (Math.random() * 16 - 8) + '%';
+        burst.style.top = 56 + (Math.random() * 8 - 4) + '%';
+        burst.style.fontSize = 18 + Math.random() * 18 + 'px';
         burst.style.pointerEvents = 'none';
-        burst.style.zIndex = '20';
+        burst.style.zIndex = '30';
         burst.style.transition = 'all 1s ease';
         document.body.appendChild(burst);
 
         setTimeout(() => {
           burst.style.transform =
-            `translate(${(Math.random() * 240 - 120)}px, ${-(Math.random() * 220 + 60)}px) scale(1.4)`;
+            `translate(${(Math.random() * 220 - 110)}px, ${-(Math.random() * 220 + 40)}px) scale(1.3)`;
           burst.style.opacity = '0';
         }, 20);
 
@@ -435,8 +536,8 @@
     }
 
     function celebrate() {
-      for (let i = 0; i < 30; i++) {
-        setTimeout(() => burstHearts(), i * 120);
+      for (let i = 0; i < 24; i++) {
+        setTimeout(() => burstHearts(), i * 110);
       }
     }
 
