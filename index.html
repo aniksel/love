@@ -313,6 +313,39 @@
       opacity: 0.78;
     }
 
+    .gallery-title {
+      margin: 22px 0 10px;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .gallery-item {
+      margin: 0;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.22);
+      min-height: 88px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+    }
+
     @media (max-width: 640px) {
       body {
         padding: 12px;
@@ -353,6 +386,10 @@
       .photo-wrap {
         max-width: 220px;
       }
+
+      .photo-gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     @media (max-width: 380px) {
@@ -370,6 +407,10 @@
 
       .photo-wrap {
         max-width: 190px;
+      }
+
+      .gallery-item {
+        min-height: 76px;
       }
     }
   </style>
@@ -390,7 +431,6 @@
         <div class="btn-row">
           <button onclick="nextScreen(2)">открыть открытку</button>
         </div>
-        <div class="photo-note">Сюда можно поставить вашу общую фотографию</div>
       </div>
 
       <div class="screen" id="screen2">
@@ -446,6 +486,20 @@
         <div class="final-text">
           Спасибо вам за заботу, поддержку, терпение, доброту и за то, что вы у меня есть.
           Вы для меня очень важны. Эта страница — маленькое напоминание о том, как сильно я вас люблю.
+        </div>
+
+        <div class="gallery-title">Наши фото</div>
+        <div class="photo-gallery">
+          <figure class="gallery-item"><img src="1420.JPEG" alt="Наше фото 1" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="19970.JPEG" alt="Наше фото 2" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="239.JPEG" alt="Наше фото 3" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="52588.JPEG" alt="Наше фото 4" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="IMG_4862.jpg" alt="Наше фото 5" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="IMG_5523.jpg" alt="Наше фото 6" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="IMG_5529.jpg" alt="Наше фото 7" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="IMG_5619.jpg" alt="Наше фото 8" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="IMG_5785.jpg" alt="Наше фото 9" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="IMG_6126.jpg" alt="Наше фото 10" loading="lazy" /></figure>
         </div>
 
         <div class="btn-row">
