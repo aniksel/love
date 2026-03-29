@@ -346,6 +346,220 @@
       aspect-ratio: 1 / 1;
     }
 
+    .memory-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 18px 0 4px;
+    }
+
+    .memory-pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+    }
+
+    .memory-stage {
+      position: relative;
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at top, rgba(255, 165, 201, 0.18), transparent 40%),
+        rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.22);
+      overflow: hidden;
+    }
+
+    .memory-stage::before {
+      content: '';
+      position: absolute;
+      inset: -30% 20% auto;
+      height: 180px;
+      background: radial-gradient(circle, rgba(255, 135, 182, 0.32), transparent 72%);
+      filter: blur(14px);
+      pointer-events: none;
+    }
+
+    .memory-main {
+      position: relative;
+      width: min(100%, 420px);
+      margin: 0 auto;
+      padding: 12px 12px 16px;
+      border-radius: 24px;
+      background: rgba(20, 18, 36, 0.72);
+      border: 1px solid rgba(255,255,255,0.1);
+      transform: rotate(-1.5deg);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      box-shadow: 0 20px 34px rgba(0,0,0,0.24);
+    }
+
+    .memory-main:hover {
+      transform: rotate(0deg) translateY(-4px);
+      box-shadow: 0 24px 42px rgba(0,0,0,0.28);
+    }
+
+    .memory-main.is-swapping {
+      animation: memorySwap 0.45s ease;
+    }
+
+    @keyframes memorySwap {
+      0% {
+        transform: rotate(-3deg) scale(0.96);
+      }
+      60% {
+        transform: rotate(1deg) scale(1.02);
+      }
+      100% {
+        transform: rotate(-1.5deg) scale(1);
+      }
+    }
+
+    .memory-badge {
+      position: absolute;
+      top: 22px;
+      left: 22px;
+      z-index: 1;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(14, 12, 28, 0.7);
+      backdrop-filter: blur(10px);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .memory-main img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 18px;
+    }
+
+    .memory-caption {
+      margin: 16px auto 0;
+      max-width: 520px;
+      font-size: clamp(17px, 4.2vw, 23px);
+      line-height: 1.55;
+    }
+
+    .memory-caption strong {
+      color: #ffd9e6;
+    }
+
+    .memory-controls {
+      margin-top: 16px;
+    }
+
+    .surprise-card {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 24px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05)),
+        rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+      box-shadow: 0 16px 30px rgba(0,0,0,0.18);
+    }
+
+    .surprise-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 36px rgba(0,0,0,0.24);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06)),
+        rgba(255,255,255,0.06);
+    }
+
+    .surprise-card:focus-visible {
+      outline: 2px solid rgba(255,255,255,0.8);
+      outline-offset: 4px;
+    }
+
+    .surprise-label {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.78;
+    }
+
+    .surprise-text {
+      margin-top: 10px;
+      font-size: clamp(18px, 4.4vw, 25px);
+      line-height: 1.5;
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .memory-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .memory-thumb {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.06);
+      border-radius: 18px;
+      padding: 8px;
+      color: white;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.16);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .memory-thumb:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255,255,255,0.24);
+      background: rgba(255,255,255,0.1);
+    }
+
+    .memory-thumb.active {
+      background: rgba(255, 122, 173, 0.16);
+      border-color: rgba(255, 192, 219, 0.5);
+      box-shadow: 0 14px 28px rgba(255, 90, 140, 0.22);
+    }
+
+    .memory-thumb img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+
+    .memory-thumb-label {
+      display: block;
+      font-size: 13px;
+      line-height: 1.35;
+      opacity: 0.92;
+    }
+
+    body.wow-mode {
+      animation-duration: 6s;
+    }
+
+    body.wow-mode .card {
+      box-shadow: 0 24px 80px rgba(255, 110, 170, 0.2);
+      border-color: rgba(255,255,255,0.16);
+    }
+
+    body.wow-mode .memory-stage {
+      box-shadow: 0 24px 60px rgba(255, 110, 170, 0.18);
+    }
+
     @media (max-width: 640px) {
       body {
         padding: 12px;
@@ -390,6 +604,24 @@
       .photo-gallery {
         grid-template-columns: repeat(2, 1fr);
       }
+
+      .memory-stage {
+        padding: 14px;
+        border-radius: 24px;
+      }
+
+      .memory-main {
+        padding: 10px 10px 14px;
+      }
+
+      .memory-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .surprise-text {
+        min-height: 90px;
+      }
     }
 
     @media (max-width: 380px) {
@@ -411,6 +643,11 @@
 
       .gallery-item {
         min-height: 76px;
+      }
+
+      .memory-thumb-label,
+      .memory-pill {
+        font-size: 12px;
       }
     }
   </style>
@@ -488,18 +725,77 @@
           Вы для меня очень важны. Эта страница — маленькое напоминание о том, как сильно я вас люблю.
         </div>
 
-        <div class="gallery-title">Наши фото</div>
-        <div class="photo-gallery">
-          <figure class="gallery-item"><img src="1420.JPEG" alt="Наше фото 1" loading="lazy" /></figure>
-          <figure class="gallery-item"><img src="19970.JPEG" alt="Наше фото 2" loading="lazy" /></figure>
-          <figure class="gallery-item"><img src="239.JPEG" alt="Наше фото 3" loading="lazy" /></figure>
-          <figure class="gallery-item"><img src="52588.JPEG" alt="Наше фото 4" loading="lazy" /></figure>
-          <figure class="gallery-item"><img src="IMG_4862.jpg" alt="Наше фото 5" loading="lazy" /></figure>
-          <figure class="gallery-item"><img src="IMG_5523.jpg" alt="Наше фото 6" loading="lazy" /></figure>
-          <figure class="gallery-item"><img src="IMG_5529.jpg" alt="Наше фото 7" loading="lazy" /></figure>
-          <figure class="gallery-item"><img src="IMG_5619.jpg" alt="Наше фото 8" loading="lazy" /></figure>
-          <figure class="gallery-item"><img src="IMG_5785.jpg" alt="Наше фото 9" loading="lazy" /></figure>
-          <figure class="gallery-item"><img src="IMG_6126.jpg" alt="Наше фото 10" loading="lazy" /></figure>
+        <div class="memory-meta">
+          <div class="memory-pill">9 тёплых воспоминаний</div>
+          <div class="memory-pill">100% любовь</div>
+          <div class="memory-pill" id="memoryStatus">сейчас на экране: 1 из 9</div>
+        </div>
+
+        <div class="memory-stage">
+          <div class="memory-main" id="memoryMain">
+            <div class="memory-badge" id="memoryBadge">воспоминание 1</div>
+            <img id="featuredPhoto" src="1420.JPEG" alt="Наше воспоминание 1" loading="lazy" />
+          </div>
+          <div class="memory-caption" id="memoryCaption">
+            <strong>Остановить этот момент:</strong> просто ещё раз почувствовать,
+            как рядом с вами всегда спокойно, тепло и по-настоящему хорошо.
+          </div>
+        </div>
+
+        <div class="btn-row memory-controls">
+          <button onclick="shuffleMemory()">другое воспоминание</button>
+          <button class="ghost" id="wowButton" onclick="toggleWowMode()">включить вау-режим</button>
+        </div>
+
+        <div
+          class="surprise-card"
+          role="button"
+          tabindex="0"
+          onclick="nextReason()"
+          onkeydown="handleReasonKey(event)"
+        >
+          <div class="surprise-label">банка причин, почему вы лучшие</div>
+          <div class="surprise-text" id="reasonText">Нажмите сюда и я покажу ещё одну тёплую мысль ✨</div>
+        </div>
+
+        <div class="gallery-title">Лента воспоминаний</div>
+        <div class="memory-strip">
+          <button class="memory-thumb active" type="button" data-memory-index="0" onclick="showMemory(0)">
+            <img src="1420.JPEG" alt="Миниатюра воспоминания 1" loading="lazy" />
+            <span class="memory-thumb-label">Нежный кадр номер один</span>
+          </button>
+          <button class="memory-thumb" type="button" data-memory-index="1" onclick="showMemory(1)">
+            <img src="19970.JPEG" alt="Миниатюра воспоминания 2" loading="lazy" />
+            <span class="memory-thumb-label">Кадр, в котором много тепла</span>
+          </button>
+          <button class="memory-thumb" type="button" data-memory-index="2" onclick="showMemory(2)">
+            <img src="239.JPEG" alt="Миниатюра воспоминания 3" loading="lazy" />
+            <span class="memory-thumb-label">Момент, который хочется сохранить</span>
+          </button>
+          <button class="memory-thumb" type="button" data-memory-index="3" onclick="showMemory(3)">
+            <img src="52588.JPEG" alt="Миниатюра воспоминания 4" loading="lazy" />
+            <span class="memory-thumb-label">Тот самый уютный эпизод</span>
+          </button>
+          <button class="memory-thumb" type="button" data-memory-index="4" onclick="showMemory(4)">
+            <img src="IMG_5523.jpg" alt="Миниатюра воспоминания 5" loading="lazy" />
+            <span class="memory-thumb-label">Фото с особенным настроением</span>
+          </button>
+          <button class="memory-thumb" type="button" data-memory-index="5" onclick="showMemory(5)">
+            <img src="IMG_5529.jpg" alt="Миниатюра воспоминания 6" loading="lazy" />
+            <span class="memory-thumb-label">Ещё один кадр в копилку любви</span>
+          </button>
+          <button class="memory-thumb" type="button" data-memory-index="6" onclick="showMemory(6)">
+            <img src="IMG_5619.jpg" alt="Миниатюра воспоминания 7" loading="lazy" />
+            <span class="memory-thumb-label">Кадр, который поднимает настроение</span>
+          </button>
+          <button class="memory-thumb" type="button" data-memory-index="7" onclick="showMemory(7)">
+            <img src="IMG_5785.jpg" alt="Миниатюра воспоминания 8" loading="lazy" />
+            <span class="memory-thumb-label">Маленькое сокровище в галерее</span>
+          </button>
+          <button class="memory-thumb" type="button" data-memory-index="8" onclick="showMemory(8)">
+            <img src="IMG_6126.jpg" alt="Миниатюра воспоминания 9" loading="lazy" />
+            <span class="memory-thumb-label">Финальный кадр с вау-эффектом</span>
+          </button>
         </div>
 
         <div class="btn-row">
@@ -514,7 +810,65 @@
     const heartsLayer = document.getElementById('heartsLayer');
     const sparkLayer = document.getElementById('sparkLayer');
     const heartSymbols = ['❤️', '💖', '💕', '💗', '💘'];
+    const memories = [
+      {
+        src: '1420.JPEG',
+        badge: 'воспоминание 1',
+        caption: 'Остановить этот момент: просто ещё раз почувствовать, как рядом с вами всегда спокойно, тепло и по-настоящему хорошо.'
+      },
+      {
+        src: '19970.JPEG',
+        badge: 'воспоминание 2',
+        caption: 'Этот кадр как маленькое доказательство того, что самые важные вещи в жизни обычно выглядят как любовь, забота и домашний уют.'
+      },
+      {
+        src: '239.JPEG',
+        badge: 'воспоминание 3',
+        caption: 'Есть фотографии, которые просто красивые. А есть такие, в которых живёт настроение целого родного мира. Эта как раз такая.'
+      },
+      {
+        src: '52588.JPEG',
+        badge: 'воспоминание 4',
+        caption: 'Хочется оставить этот момент поближе к сердцу, потому что в нём очень много вас, а значит очень много хорошего.'
+      },
+      {
+        src: 'IMG_5523.jpg',
+        badge: 'воспоминание 5',
+        caption: 'Тут особенно чувствуется, как мне повезло с вами: даже через экран это фото отдаёт теплом и нежностью.'
+      },
+      {
+        src: 'IMG_5529.jpg',
+        badge: 'воспоминание 6',
+        caption: 'Если бы уют можно было сохранить в одном кадре, он бы выглядел примерно так: спокойно, мило и очень по-настоящему.'
+      },
+      {
+        src: 'IMG_5619.jpg',
+        badge: 'воспоминание 7',
+        caption: 'Этот момент хочется пересматривать не из-за идеальности, а потому что в нём есть главное: вы, родное чувство и радость.'
+      },
+      {
+        src: 'IMG_5785.jpg',
+        badge: 'воспоминание 8',
+        caption: 'Иногда одна фотография говорит громче длинных текстов. Эта будто тихо шепчет: "у нас всё по любви".'
+      },
+      {
+        src: 'IMG_6126.jpg',
+        badge: 'воспоминание 9',
+        caption: 'Финальный кадр этой открытки, но точно не финальный повод сказать, как сильно я вас люблю и как вы для меня важны.'
+      }
+    ];
+    const reasons = [
+      'Потому что рядом с вами даже самые обычные дни становятся тёплыми и запоминающимися.',
+      'Потому что вы умеете поддержать так, что после пары слов уже легче дышать.',
+      'Потому что ваша забота чувствуется в мелочах, а именно мелочи и делают любовь настоящей.',
+      'Потому что с вами можно быть собой и знать, что тебя всё равно очень любят.',
+      'Потому что вы не просто семья, а моё главное тихое место силы.',
+      'Потому что вы умеете одновременно быть надёжными, добрыми, смешными и невероятно родными.'
+    ];
     let taps = 0;
+    let currentMemoryIndex = 0;
+    let currentReasonIndex = -1;
+    let wowInterval = null;
 
     function createBackground() {
       for (let i = 0; i < 20; i++) {
@@ -544,6 +898,11 @@
         screen.classList.remove('active');
       });
       document.getElementById('screen' + n).classList.add('active');
+      if (n === 4) {
+        activateFinalScreen();
+      } else {
+        stopWowMode(true);
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -595,15 +954,119 @@
       }
     }
 
+    function renderMemory(index) {
+      currentMemoryIndex = index;
+      const memory = memories[index];
+      const featuredPhoto = document.getElementById('featuredPhoto');
+      const memoryBadge = document.getElementById('memoryBadge');
+      const memoryCaption = document.getElementById('memoryCaption');
+      const memoryStatus = document.getElementById('memoryStatus');
+      const memoryMain = document.getElementById('memoryMain');
+
+      featuredPhoto.src = memory.src;
+      featuredPhoto.alt = `Наше воспоминание ${index + 1}`;
+      memoryBadge.textContent = memory.badge;
+      memoryCaption.innerHTML = `<strong>${memory.badge}:</strong> ${memory.caption}`;
+      memoryStatus.textContent = `сейчас на экране: ${index + 1} из ${memories.length}`;
+
+      memoryMain.classList.remove('is-swapping');
+      void memoryMain.offsetWidth;
+      memoryMain.classList.add('is-swapping');
+
+      document.querySelectorAll('.memory-thumb').forEach(button => {
+        const buttonIndex = Number(button.dataset.memoryIndex);
+        button.classList.toggle('active', buttonIndex === index);
+      });
+    }
+
+    function showMemory(index) {
+      renderMemory(index);
+      burstHearts();
+    }
+
+    function shuffleMemory() {
+      let nextIndex = currentMemoryIndex;
+
+      while (nextIndex === currentMemoryIndex) {
+        nextIndex = Math.floor(Math.random() * memories.length);
+      }
+
+      renderMemory(nextIndex);
+      burstHearts();
+    }
+
+    function nextReason(initial = false) {
+      let nextIndex = currentReasonIndex;
+
+      while (nextIndex === currentReasonIndex) {
+        nextIndex = Math.floor(Math.random() * reasons.length);
+      }
+
+      currentReasonIndex = nextIndex;
+      document.getElementById('reasonText').textContent = reasons[nextIndex];
+
+      if (!initial) {
+        burstHearts();
+      }
+    }
+
+    function handleReasonKey(event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        nextReason();
+      }
+    }
+
+    function activateFinalScreen() {
+      renderMemory(currentMemoryIndex);
+      if (currentReasonIndex === -1) {
+        nextReason(true);
+      }
+    }
+
+    function stopWowMode(silent = false) {
+      if (wowInterval) {
+        clearInterval(wowInterval);
+        wowInterval = null;
+      }
+
+      document.body.classList.remove('wow-mode');
+      document.getElementById('wowButton').textContent = 'включить вау-режим';
+
+      if (!silent) {
+        burstHearts();
+      }
+    }
+
+    function toggleWowMode() {
+      if (wowInterval) {
+        stopWowMode();
+        return;
+      }
+
+      document.body.classList.add('wow-mode');
+      document.getElementById('wowButton').textContent = 'выключить вау-режим';
+      wowInterval = setInterval(() => {
+        renderMemory((currentMemoryIndex + 1) % memories.length);
+      }, 2200);
+      celebrate();
+    }
+
     function restartCard() {
+      stopWowMode(true);
       taps = 0;
+      currentMemoryIndex = 0;
+      currentReasonIndex = -1;
       document.getElementById('tapCount').textContent = '0';
       document.getElementById('progressFill').style.width = '0%';
       document.getElementById('choiceMessage').textContent = 'Выберите одну карточку выше ✨';
+      document.getElementById('reasonText').textContent = 'Нажмите сюда и я покажу ещё одну тёплую мысль ✨';
+      renderMemory(0);
       nextScreen(1);
     }
 
     createBackground();
+    renderMemory(0);
   </script>
 </body>
 </html>
