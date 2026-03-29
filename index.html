@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>❤️</title>
+  <title>Для вас ❤️</title>
   <style>
     * {
       box-sizing: border-box;
@@ -12,205 +12,94 @@
     body {
       margin: 0;
       min-height: 100vh;
+      font-family: Arial, sans-serif;
       overflow: hidden;
+      background: linear-gradient(-45deg, #0f1020, #30192b, #1b2c52, #4a1e37);
+      background-size: 400% 400%;
+      animation: bgShift 12s ease infinite;
+      color: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: "Arial", sans-serif;
-      background: linear-gradient(-45deg, #0f1020, #311b2f, #1a2a4f, #4a1831);
-      background-size: 400% 400%;
-      animation: bgMove 12s ease infinite;
-      color: white;
       position: relative;
     }
 
-    @keyframes bgMove {
+    @keyframes bgShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
-    .stars,
-    .hearts {
+    .layer {
       position: absolute;
       inset: 0;
       pointer-events: none;
       overflow: hidden;
     }
 
-    .star {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      background: rgba(255,255,255,0.9);
-      border-radius: 50%;
-      animation: twinkle 3s infinite ease-in-out;
-    }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.2; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.8); }
-    }
-
-    .heart-float {
+    .heart {
       position: absolute;
       bottom: -40px;
-      font-size: 20px;
       opacity: 0.85;
-      animation: floatUp linear infinite;
-      filter: drop-shadow(0 0 8px rgba(255, 80, 120, 0.6));
+      animation: fly linear infinite;
+      filter: drop-shadow(0 0 8px rgba(255, 110, 170, 0.5));
     }
 
-    @keyframes floatUp {
+    @keyframes fly {
       0% {
-        transform: translateY(0) rotate(0deg) scale(0.9);
+        transform: translateY(0) rotate(0deg) scale(0.8);
         opacity: 0;
       }
       10% {
         opacity: 0.9;
       }
       100% {
-        transform: translateY(-120vh) rotate(360deg) scale(1.3);
+        transform: translateY(-120vh) rotate(360deg) scale(1.2);
         opacity: 0;
       }
+    }
+
+    .spark {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.8);
+      animation: blink 3s infinite ease-in-out;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.8); }
     }
 
     .card {
       position: relative;
       z-index: 2;
-      width: min(92vw, 760px);
-      padding: 40px 28px;
-      border-radius: 28px;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.08);
-      box-shadow:
-        0 10px 40px rgba(0,0,0,0.35),
-        inset 0 0 0 1px rgba(255,255,255,0.12);
+      width: min(94vw, 760px);
+      min-height: 520px;
+      background: rgba(255,255,255,0.09);
       backdrop-filter: blur(14px);
-      animation: cardIn 1.5s ease;
+      border-radius: 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      padding: 30px 24px;
+      text-align: center;
+      overflow: hidden;
     }
 
-    @keyframes cardIn {
+    .screen {
+      display: none;
+      animation: fadeUp 0.6s ease;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    @keyframes fadeUp {
       from {
         opacity: 0;
-        transform: translateY(30px) scale(0.96);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    .small {
-      font-size: 16px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      opacity: 0.8;
-      margin-bottom: 18px;
-      animation: fadeIn 2s ease;
-    }
-
-    .title {
-      font-size: clamp(42px, 9vw, 92px);
-      line-height: 1.05;
-      font-weight: 700;
-      margin: 0;
-      animation: fadeInUp 1.6s ease;
-      text-shadow: 0 0 18px rgba(255, 120, 170, 0.35);
-    }
-
-    .title span {
-      display: inline-block;
-      animation: pulse 1.2s infinite ease-in-out;
-    }
-
-    .subtitle {
-      margin-top: 20px;
-      font-size: clamp(18px, 3vw, 28px);
-      opacity: 0.95;
-      animation: fadeInUp 2.1s ease;
-    }
-
-    .line {
-      width: 110px;
-      height: 4px;
-      margin: 24px auto;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #ff7aa2, #ffd1e0, #ff7aa2);
-      box-shadow: 0 0 18px rgba(255, 110, 170, 0.5);
-      animation: glow 2s infinite alternate;
-    }
-
-    @keyframes glow {
-      from { transform: scaleX(0.95); opacity: 0.7; }
-      to { transform: scaleX(1.08); opacity: 1; }
-    }
-
-    .hint {
-      margin-top: 22px;
-      font-size: 15px;
-      opacity: 0.75;
-      animation: fadeIn 3s ease;
-    }
-
-    .btn {
-      margin-top: 28px;
-      border: none;
-      border-radius: 999px;
-      padding: 16px 28px;
-      font-size: 18px;
-      cursor: pointer;
-      color: white;
-      background: linear-gradient(90deg, #ff5f8f, #ff7eb3);
-      box-shadow: 0 8px 28px rgba(255, 90, 140, 0.38);
-      animation: buttonPulse 1.8s infinite;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 34px rgba(255, 90, 140, 0.52);
-    }
-
-    .secret {
-      margin-top: 26px;
-      font-size: clamp(22px, 4vw, 34px);
-      min-height: 44px;
-      opacity: 0;
-      transform: translateY(12px);
-      transition: all 0.6s ease;
-      text-shadow: 0 0 12px rgba(255,255,255,0.25);
-    }
-
-    .secret.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .secret .big-heart {
-      display: inline-block;
-      animation: pulse 1s infinite ease-in-out;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.18); }
-    }
-
-    @keyframes buttonPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.04); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(22px);
+        transform: translateY(16px);
       }
       to {
         opacity: 1;
@@ -218,61 +107,348 @@
       }
     }
 
-    @media (max-width: 600px) {
+    .small {
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 14px;
+      opacity: 0.8;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(36px, 7vw, 72px);
+      line-height: 1.05;
+      text-shadow: 0 0 16px rgba(255, 120, 170, 0.35);
+    }
+
+    h2 {
+      font-size: clamp(28px, 5vw, 46px);
+      margin: 10px 0 12px;
+    }
+
+    p {
+      font-size: clamp(18px, 2.6vw, 24px);
+      line-height: 1.5;
+      opacity: 0.96;
+      margin: 16px auto;
+      max-width: 560px;
+    }
+
+    .emoji {
+      display: inline-block;
+      animation: pulse 1.2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.18); }
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 26px;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 14px 24px;
+      font-size: 17px;
+      cursor: pointer;
+      color: white;
+      background: linear-gradient(90deg, #ff5f8f, #ff82b5);
+      box-shadow: 0 10px 28px rgba(255, 90, 140, 0.32);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 14px 34px rgba(255, 90, 140, 0.4);
+    }
+
+    .ghost {
+      background: rgba(255,255,255,0.14);
+      box-shadow: none;
+    }
+
+    .message-box {
+      margin-top: 24px;
+      min-height: 120px;
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.08);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+      font-size: clamp(20px, 3vw, 28px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.45;
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(120px, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .choice {
+      padding: 18px 14px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.08);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 17px;
+      line-height: 1.35;
+    }
+
+    .choice:hover {
+      transform: scale(1.03);
+      background: rgba(255,255,255,0.14);
+    }
+
+    .big-heart {
+      font-size: 72px;
+      margin: 8px 0 10px;
+      animation: pulse 1s infinite ease-in-out;
+    }
+
+    .progress {
+      margin: 20px auto 0;
+      width: min(90%, 420px);
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff5f8f, #ffd1e0);
+      transition: width 0.4s ease;
+    }
+
+    .tap-heart {
+      margin: 28px auto 0;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 56px;
+      background: rgba(255,255,255,0.12);
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.12s ease;
+      box-shadow: 0 0 24px rgba(255, 90, 140, 0.25);
+    }
+
+    .tap-heart:active {
+      transform: scale(0.94);
+    }
+
+    .counter {
+      margin-top: 14px;
+      font-size: 20px;
+      opacity: 0.92;
+    }
+
+    .final-text {
+      font-size: clamp(22px, 3vw, 32px);
+      max-width: 580px;
+      margin: 18px auto 0;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 640px) {
       .card {
-        padding: 32px 20px;
+        min-height: 580px;
+        padding: 24px 18px;
       }
 
-      .btn {
+      .choice-grid {
+        grid-template-columns: 1fr;
+      }
+
+      button {
         width: 100%;
       }
     }
   </style>
 </head>
 <body>
-  <div class="stars" id="stars"></div>
-  <div class="hearts" id="hearts"></div>
+  <div class="layer" id="heartsLayer"></div>
+  <div class="layer" id="sparkLayer"></div>
 
   <div class="card">
-    <div class="small">маленькая открытка</div>
-    <h1 class="title">я вас люблю <span>❤️</span></h1>
-    <div class="line"></div>
-    <div class="subtitle">очень-очень сильно</div>
-    <button class="btn" onclick="showMessage()">нажми сюда</button>
-    <div class="secret" id="secret">и это вообще-то официальное признание <span class="big-heart">💌</span></div>
-    <div class="hint">эта страница сделана специально для вас</div>
+    <div class="screen active" id="screen1">
+      <div class="small">небольшой сюрприз</div>
+      <h1>Для моих любимых <span class="emoji">❤️</span></h1>
+      <p>У меня для вас маленькая интерактивная открытка. Нажмите кнопку ниже и давайте начнём.</p>
+      <div class="btn-row">
+        <button onclick="nextScreen(2)">открыть открытку</button>
+      </div>
+    </div>
+
+    <div class="screen" id="screen2">
+      <div class="small">шаг 1</div>
+      <h2>Сначала выберите настроение</h2>
+      <p>Какую версию послания вы хотите открыть первой?</p>
+
+      <div class="choice-grid">
+        <div class="choice" onclick="showChoiceMessage('Спасибо вам за всё, что вы для меня сделали. Я это очень ценю 💖', 3)">
+          тёплое сообщение
+        </div>
+        <div class="choice" onclick="showChoiceMessage('Вы у меня самые лучшие. Правда. Без преувеличений и официально 💌', 3)">
+          милое сообщение
+        </div>
+        <div class="choice" onclick="showChoiceMessage('Если бы был рейтинг родителей, вы бы точно заняли первое место 🏆', 3)">
+          смешное сообщение
+        </div>
+        <div class="choice" onclick="showChoiceMessage('Эта открытка вообще-то сделана с очень большим количеством любви ❤️', 3)">
+          секретное сообщение
+        </div>
+      </div>
+
+      <div class="message-box" id="choiceMessage">Выберите одну карточку выше ✨</div>
+      <div class="btn-row">
+        <button class="ghost" onclick="nextScreen(1)">назад</button>
+        <button onclick="nextScreen(3)">дальше</button>
+      </div>
+    </div>
+
+    <div class="screen" id="screen3">
+      <div class="small">шаг 2</div>
+      <h2>Теперь небольшая игра</h2>
+      <p>Нажмите на сердечко 7 раз, чтобы открыть главное послание.</p>
+
+      <div class="tap-heart" onclick="tapHeart()">❤️</div>
+      <div class="counter">Нажато: <span id="tapCount">0</span> / 7</div>
+      <div class="progress">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div class="btn-row">
+        <button class="ghost" onclick="nextScreen(2)">назад</button>
+      </div>
+    </div>
+
+    <div class="screen" id="screen4">
+      <div class="small">финал</div>
+      <div class="big-heart">💗</div>
+      <h2>Я вас очень люблю</h2>
+      <div class="final-text">
+        Спасибо вам за заботу, поддержку, терпение, доброту и за то, что вы у меня есть.
+        Вы для меня очень важны. Эта страница — маленькое напоминание о том, как сильно я вас люблю.
+      </div>
+
+      <div class="btn-row">
+        <button onclick="celebrate()">ещё сердечек</button>
+        <button class="ghost" onclick="restartCard()">пройти ещё раз</button>
+      </div>
+    </div>
   </div>
 
   <script>
-    const stars = document.getElementById("stars");
-    const hearts = document.getElementById("hearts");
+    const heartsLayer = document.getElementById('heartsLayer');
+    const sparkLayer = document.getElementById('sparkLayer');
+    const heartSymbols = ['❤️', '💖', '💕', '💗', '💘'];
+    let taps = 0;
 
-    for (let i = 0; i < 55; i++) {
-      const star = document.createElement("div");
-      star.className = "star";
-      star.style.left = Math.random() * 100 + "%";
-      star.style.top = Math.random() * 100 + "%";
-      star.style.animationDelay = Math.random() * 3 + "s";
-      star.style.animationDuration = 2 + Math.random() * 3 + "s";
-      stars.appendChild(star);
+    function createBackground() {
+      for (let i = 0; i < 24; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.fontSize = 16 + Math.random() * 24 + 'px';
+        heart.style.animationDuration = 6 + Math.random() * 8 + 's';
+        heart.style.animationDelay = Math.random() * 8 + 's';
+        heartsLayer.appendChild(heart);
+      }
+
+      for (let i = 0; i < 55; i++) {
+        const spark = document.createElement('div');
+        spark.className = 'spark';
+        spark.style.left = Math.random() * 100 + '%';
+        spark.style.top = Math.random() * 100 + '%';
+        spark.style.animationDelay = Math.random() * 4 + 's';
+        spark.style.animationDuration = 2 + Math.random() * 3 + 's';
+        sparkLayer.appendChild(spark);
+      }
     }
 
-    const heartSymbols = ["❤️", "💖", "💕", "💗", "💘"];
-
-    for (let i = 0; i < 22; i++) {
-      const heart = document.createElement("div");
-      heart.className = "heart-float";
-      heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
-      heart.style.left = Math.random() * 100 + "%";
-      heart.style.animationDuration = 6 + Math.random() * 8 + "s";
-      heart.style.animationDelay = Math.random() * 8 + "s";
-      heart.style.fontSize = 16 + Math.random() * 26 + "px";
-      hearts.appendChild(heart);
+    function nextScreen(n) {
+      document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+      });
+      document.getElementById('screen' + n).classList.add('active');
     }
 
-    function showMessage() {
-      document.getElementById("secret").classList.add("show");
+    function showChoiceMessage(text, screenNumber) {
+      document.getElementById('choiceMessage').textContent = text;
     }
+
+    function tapHeart() {
+      if (taps >= 7) return;
+      taps++;
+      document.getElementById('tapCount').textContent = taps;
+      document.getElementById('progressFill').style.width = (taps / 7) * 100 + '%';
+
+      burstHearts();
+
+      if (taps === 7) {
+        setTimeout(() => {
+          nextScreen(4);
+        }, 500);
+      }
+    }
+
+    function burstHearts() {
+      for (let i = 0; i < 8; i++) {
+        const burst = document.createElement('div');
+        burst.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+        burst.style.position = 'absolute';
+        burst.style.left = 50 + (Math.random() * 20 - 10) + '%';
+        burst.style.top = 55 + (Math.random() * 10 - 5) + '%';
+        burst.style.fontSize = 18 + Math.random() * 20 + 'px';
+        burst.style.pointerEvents = 'none';
+        burst.style.zIndex = '20';
+        burst.style.transition = 'all 1s ease';
+        document.body.appendChild(burst);
+
+        setTimeout(() => {
+          burst.style.transform =
+            `translate(${(Math.random() * 240 - 120)}px, ${-(Math.random() * 220 + 60)}px) scale(1.4)`;
+          burst.style.opacity = '0';
+        }, 20);
+
+        setTimeout(() => burst.remove(), 1100);
+      }
+    }
+
+    function celebrate() {
+      for (let i = 0; i < 30; i++) {
+        setTimeout(() => burstHearts(), i * 120);
+      }
+    }
+
+    function restartCard() {
+      taps = 0;
+      document.getElementById('tapCount').textContent = '0';
+      document.getElementById('progressFill').style.width = '0%';
+      document.getElementById('choiceMessage').textContent = 'Выберите одну карточку выше ✨';
+      nextScreen(1);
+    }
+
+    createBackground();
   </script>
 </body>
 </html>
